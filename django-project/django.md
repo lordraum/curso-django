@@ -94,7 +94,40 @@ urlpatterns = [
 ]
 ```
 
-## Includes
+## Include
+
+La forma correcta de establecer paths es que cada aplicación maneje su propio archivo urls.py. *include permite importar esos patrones de url en el urls.py del proyecto*
+
+- Importar módulo path y views.py en myapp/urls.py (Aplicación)
+- Crear lista urlpatterns, con los paths a añadir.
+- Añadir la instrucción *include* en el import del módulo path en mysite/urls.py (proyecto general)
+- Agregar en el path con la función *include* con el archivo donde se va a importar los url patterns
+
+```python
+# myapp/urls.py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path("", views.hello),
+    path("about/", views.about),
+]
+
+```
+
+```python
+# mysite/urls.py
+from django.urls import path, include
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("", include('myapp.urls')),
+    # path("home/", include('myapp.urls'))
+]
+```
+
+
+
 
 
 
