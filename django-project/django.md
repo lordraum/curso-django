@@ -126,6 +126,54 @@ urlpatterns = [
 ]
 ```
 
+## Modelos y bases de datos
+
+### Migraciones
+Actualiza la BBDD a partir del código geenrado con python.
+```bash
+python manage.py makemigrations
+```
+```bash
+python manage.py migrate 
+```
+------
+*Descargar programa DB browser for sqlite para ver la base de datos*
+
+### Modelo
+Plantilla, para convertir código de python que será convertido a SQL en una BBDD conectada. Se crean en el archivo *models.py* de cada app.
+
+### Crear modelo
+- Importar modulo *models*
+- Crear tabla, con una clase (subclase) a partir de *models.Model*
+- Establecer columnas => variable (nombre de la columna) => tipo de dato con models.TipoDeDato => max_length
+
+```python
+from django.db import models
+
+class Project(models.Model):
+    name = models.CharField(max_length=200)
+```
+
+### Conectar modelos
+Ir al archivo settings.py del proyecto (mysite), buscar la lista INSTALLED_APPS, y agregar 'myapp'. Ejecutar el servidor para verificar, hacer migraciones, si se quiere especificando la app. Esto crea el archivo *0001_initial.py* en la carpeta migrations de la app. Ejecutar migraciones especificando la app.
+```bash
+python manage.py makemigrations myapp
+```
+
+### Establecer FK
+En la columna que tenga la relación, utilizar el método models.ForeignKey(TablaRelacionada)
+
+#### on_delete
+Establece que hacer cuando se borra la base da datos de la que se importa el dato, El valor models.CASCADE elimina todos los datos que tengan relación.
+
+```python
+class Task(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    project = models.ForeignKey(Project, on_delete = (models.CASCADE)
+```
+
+
 
 
 
