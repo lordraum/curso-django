@@ -172,11 +172,73 @@ class Task(models.Model):
     description = models.TextField()
     project = models.ForeignKey(Project, on_delete = (models.CASCADE)
 ```
+### Cambiar base de datos conectada a django
+- Ir a settings.py lista DATABASES
 
+## Django Shell
+Consola que permite interactuar con la BBDD, hacer consultas.
 
+```bash
+python manage.py shell 
+```
 
+### CREATE
 
+Importar modelos
 
+```python shell
+>>> from myapp.models import Project, Task
+```
+#### Crear instanciando la clase
+
+p = Project(name = "aplicacion movil")
+
+**Importante** => El método save()p = guarda lo creado en la base de datos.
+
+```python shell
+>>> p.save()
+```
+
+#### model_set
+
+Para establecer un registro también se puede utilizar el nombre de la clase en minúsculas + _ + set
+
+Importar modelos y acceder a un registro (guardarlo en variable).
+
+```python shell
+p.task_set.create(title = "desarrollar proyecto 1")
+# Se utiliza de esta forma porque así se le llama la modelo en la BBDD
+```
+
+### READ
+
+#### método all
+Visualiza todos los registros de una base
+```python shell
+>>> Project.objects.all() # Project es la BBDD
+```
+#### método get
+El método get accede a un registro específico según se indique, ejemplo ID. La búsqueda debe ser exacta.
+```python shell
+Project.objects.get(id=1)
+Project.objects.get(name="aplicacion movil")
+```
+Para salir del shell se utiliza ctrl + D.
+
+#### model_set
+Para acceder a todos los registros se utiliza el método all
+
+```python shell
+>>> p.task_set.all()
+# Se utiliza de esta forma porque así se le denomina al modelo en BBDD
+```
+
+#### filter
+Para realizar búsquedas es mejor utilizar el método filter con diferentes opciones de búsqueda.
+
+```python shell
+>>> Project.objects.filter(name__startswith="apl")
+```
 
 
 
