@@ -268,6 +268,58 @@ Se utiliza un verbo de formato según el tipo de dato `%s`
 return HttpResponse('<h2>Hello %s</h2>' %username)
 ```
 
+## params and models
+
+### Consultas a través de los params
+Importar modelo en views.py
+```python
+from .models im
+```
+Importar modelo JsonResponse
+```python
+from django.http import HttpResponse, JsonResponse
+```
+Obtener todos los proyectos en variable
+
+```python
+def projects(request):
+    projects = Project.objects.all()
+    return HttpResponse('projects') 
+``` 
+
+Serializar respuesta con JSON response, es necesario agregar el valor `safe=false` en la respuesta y solicitar el queryset (datos de la consulta) como lista. Mostrar los valores de Objects.
+
+```python
+def projects(request):
+    projects = list(Project.objects.values())
+    return JsonResponse(projects, safe=False) 
+```
+
+Otro ejemplo
+```python
+path("tasks/<int:id>", views.tasks),
+
+def tasks(request, id):
+    task = Task.objects.get(id=id)
+    return HttpResponse('task: %s' % task.title)
+```
+
+### Devolver error 404
+
+Importar modulo de eror 404
+
+```python
+from django.shortcuts import get_object_or_404
+```
+
+Usar para obtener tarea o devolver error 404
+def tasks(request, id):
+```python
+    def tasks(request, id):
+        task = get_object_or_404(Task, id=id)
+        return HttpResponse('task: %s' % task.title)
+```
+
 
 
 
