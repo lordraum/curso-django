@@ -240,6 +240,36 @@ Para realizar búsquedas es mejor utilizar el método filter con diferentes opci
 >>> Project.objects.filter(name__startswith="apl")
 ```
 
+## Url Params
+
+### Definir
+
+En el url pattern
+
+`<tipo-de-dato:parámetro>`
+```python
+path("hello/<str:username>", views.hello)
+```
+
+### Invocar
+Definir como parámetro en una vista
+
+```python
+def hello(request, username):
+    print(username)
+    return HttpResponse('Hello World')
+    # url/username => en navegador
+```
+
+### Renderizar data obtenida en el parámetro
+Se utiliza un verbo de formato según el tipo de dato `%s`
+
+```python
+return HttpResponse('<h2>Hello %s</h2>' %username)
+```
+
+
+
 
 
 
