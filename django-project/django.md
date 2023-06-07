@@ -271,14 +271,12 @@ return HttpResponse('<h2>Hello %s</h2>' %username)
 ## params and models
 
 ### Consultas a través de los params
-Importar modelo en views.py
+Importar modelos y JsonResponse en views.py
 ```python
-from .models im
-```
-Importar modelo JsonResponse
-```python
+from .models import import Project, Task
 from django.http import HttpResponse, JsonResponse
 ```
+
 Obtener todos los proyectos en variable
 
 ```python
@@ -351,6 +349,24 @@ class Project(models.Model):
 ```
 
 ### Concatenar 
+
+## Render
+Muestra plantillas html, para generar webs personalizadas y actualizadas.
+
+### Crear plantillas
+Crear carpeta templates en la raiz de la app, dónde se guardaran las plantillas en formato html.
+
+### Renderizar template
+Importar función `render()` en views
+```python
+from django.shortcuts import render
+```
+Devolver la función render con el `request` y el `archivo html` como parámetros
+
+```python
+def index(request):
+    return render(request, 'index.html')
+```
 
 
 
