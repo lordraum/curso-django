@@ -368,6 +368,27 @@ def index(request):
     return render(request, 'index.html')
 ```
 
+## Templates
+
+### Renderizar datos.
+Pasar el dato cómo parámetro de la vista, en un diccionario `{'clave': 'valor'}`
+
+```python
+def index(request):
+    title = 'Curso de Django'
+    return render(request, 'index.html', {'title' : title})
+```
+
+## Declarar dato en elemento html
+Colocar entre dosbles llaves `{{}}`
+
+```html
+<h1>{{title}}</h1>
+```
+### Template engine
+Permiten trabajar con datos en estructuras similares a las de html, que después serán convertidos en html estático.
+
+
 
 
 
