@@ -319,6 +319,39 @@ def tasks(request, id):
         task = get_object_or_404(Task, id=id)
         return HttpResponse('task: %s' % task.title)
 ```
+## Django Admin
+
+Panel de administrador de django, permite añadir modelos, crear instancias, añadir campos, etc.
+
+```python
+path("admin/", admin.site.urls)
+# url/admin abre el panel de administrador
+```
+
+### admin.py
+Permite añadir modelos al panel de administrador.
+
+### Crear usuario
+```bash
+python manage.py createsuperuser
+```
+
+### Añadir modelos a Admin
+- Importar modelos en admins.py
+- Registrar modelo con `admin.site.register(ModelName)`
+
+### Mostrar los objects en el panel según el campo necesitado
+Agregar a la clase modelo un método especificando el tipo de dato y el campo requerido
+
+```python
+class Project(models.Model):
+    name = models.CharField(max_length=200)    
+    def __str__(self):
+        return self.name
+```
+
+### Concatenar 
+
 
 
 
