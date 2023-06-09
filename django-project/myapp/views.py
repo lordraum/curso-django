@@ -12,11 +12,26 @@ def about(request):
     return render(request, 'about.html')  
 
 def projects(request):
-    return render(request, 'projects.html')
+    projects = Project.objects.all()
+    return render(request, 'projects.html', {'projects' : projects})
   
 def tasks(request):
-    return render(request, 'tasks.html')
+    tasks = Task.objects.all()
+    return render(request, 'tasks.html', {'tasks' : tasks})
 
 def hello(request, username):
     print(username)
     return HttpResponse('<h2>Hello %s</h2>' %username)
+
+# (Task.objects.all())[0].description = "asdfasdf asdfasdfasdf asdfasdf asdfasdf"
+# Task.objects.all()[0].save()
+
+def addTaskDescription(id, s):
+    tarea_existente = Task.objects.get(id=id)
+    tarea_existente.description = s
+    tarea_existente.save()
+
+def addTaskDone(id, b):
+    tarea_existente = Task.objects.get(id=id)
+    tarea_existente.done = b
+    tarea_existente.save()

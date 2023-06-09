@@ -386,20 +386,22 @@ Colocar entre dosbles llaves `{{}}`
 <h1>{{title}}</h1>
 ```
 ### Template engine
-Permiten trabajar con datos en estructuras similares a las de html, que después serán convertidos en html estático.
+Permiten trabajar con datos en estructuras similares a las de html, que después serán convertidos en html estático. el template engine por defecto de django es jinja
+
+## Estructuras de control de flujo en el motor de plantillas
+
+### bucles
+
+bucle for
+
+```python
+{% for project in projects %}
+
+<h2>{{project.name}}</h2>
+
+{% endfor %}
+```
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+### condicionales
