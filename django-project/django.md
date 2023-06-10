@@ -386,11 +386,13 @@ Colocar entre dosbles llaves `{{}}`
 <h1>{{title}}</h1>
 ```
 ### Template engine
-Permiten trabajar con datos en estructuras similares a las de html, que después serán convertidos en html estático. el template engine por defecto de django es jinja
+Permiten trabajar con datos en estructuras similares a las de html, que después serán convertidos en html estático. el template engine por defecto de django es jinja 2 (Actualmente jinja 3)
 
-## Estructuras de control de flujo en el motor de plantillas
+## Jinja - estructuras de control de flujo
 
-### bucles
+[Documentación Jinja](https://jinja.palletsprojects.com/en/3.1.x/)
+
+### jinja loops
 
 bucle for
 
@@ -402,6 +404,17 @@ bucle for
 {% endfor %}
 ```
 
+### jinja condicional if
 
+```python
+{% if task.done == False %}
+    <p>TAREA PENDIENTE!!!</p>
+    {% else %}
+    <p>TAREA REALIZADA!!!</p>
+    {% endif %}
+```
 
-### condicionales
+### Condicional if en una línea
+```python
+<h2>{{task.title}} {% if task.done == False %} ⏰ {% else %} ☑️ {% endif %}</h2>
+```
