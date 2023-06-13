@@ -506,5 +506,33 @@ Establecer el form como post
 
 Django verifica si el formulario ha sido generado por nuestro propio servidor, para ello hay que añadir el token en el formulario, antes de la etiqueta jinja que añade el form.
 
+## Post Forms (Model Project)
 
+- Reorganizar carpetas y actualizar paths de estos archivos
+    - /projects/
+    - /tasks/
+- Crear template create_project
+- Crear vista create_project => request
+    - Devolver render
+        - request, template html
+- Definir url pattern
+    - path, vista
+- Extender base en template create project
+    - {{block content}}
+    - h1
+- Crear clase para django django form /CreateNewProject/
+    - name => label='Nombre del proyecto', maxlenght 200
+- Importar Clase en views
+- Añadir Clase del form en el render
+- Añadir formulario en el template
+    - Añadir etiquetas => form POST, button
+- Views => Definir condición
+    - GET => render page
+    - POST => 1- Imprimir petición post (para verificar), devolver render page 
+- Añadir csrf token
+- Guardar registro en BBDD
+    - Importar modelo Project
+    - Consulta para crear proyecto
 
+### Format document python
+ - F1 => Format Document => escoger opción de formateo => /autopep 8/
