@@ -536,3 +536,16 @@ Django verifica si el formulario ha sido generado por nuestro propio servidor, p
 
 ### Format document python
  - F1 => Format Document => escoger opción de formateo => /autopep 8/
+
+## url names
+Nombres internos para las url, que facilita la estructura de paths y las redirecciones, sobre todo para cambios futuros de path.
+
+# Crear url names
+
+- Añadir como tercer atributo en el pattern => `name='urlname'`
+- Cambiar redirección el vista create_tasks, ahora utilizando el url name de task
+- Redireccionar en vista create project POST
+- Cambiar el path de create project.
+- En la base => href => cambiar la url, por la sintáxis para añadir url name de jinja
+    - `{% url 'urlname' %}`
+- Cambiar en toda los link de la base.
