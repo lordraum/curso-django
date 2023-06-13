@@ -540,7 +540,7 @@ Django verifica si el formulario ha sido generado por nuestro propio servidor, p
 ## url names
 Nombres internos para las url, que facilita la estructura de paths y las redirecciones, sobre todo para cambios futuros de path.
 
-# Crear url names
+### Crear url names
 
 - Añadir como tercer atributo en el pattern => `name='urlname'`
 - Cambiar redirección el vista create_tasks, ahora utilizando el url name de task
@@ -549,3 +549,18 @@ Nombres internos para las url, que facilita la estructura de paths y las redirec
 - En la base => href => cambiar la url, por la sintáxis para añadir url name de jinja
     - `{% url 'urlname' %}`
 - Cambiar en toda los link de la base.
+
+## Static files
+
+Contenidos que no cambian, ejemplo un css o js no procesado, o imágenes.
+
+### Trabajar con estáticos
+
+- Django permite servir estáticos por aplicación, por defecto tiene establecida como carpeta de estáticos `static/`
+    - settings.py/STATIC_URL
+- Crear carpeta static/
+- Cargar estáticos en plantillas con jinja
+```python
+{% load static %} # Al inicio de la página
+<img src="{% static 'my_app/example.jpg' %}" alt="My image">
+```

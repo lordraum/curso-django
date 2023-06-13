@@ -1,9 +1,7 @@
-{% extends 'layout/base.html' %}
-
-<!--  -->
-{% block content %}
+{% extends 'layout/base.html' %} {% load static %} {% block content %}
 
 <h1>{{ title }}</h1>
+<img src="{% static 'bob-dylan.jpg' %}" alt="Bob Dylan" />
 <p>
   Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus error
   impedit doloribus sed! Minus dolor voluptatibus consequatur? Laboriosam modi
