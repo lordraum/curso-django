@@ -1,8 +1,8 @@
-#from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
 from .models import Project, Task
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import CreateNewTask
 
 def index(request):
     title = 'Curso de Django'
@@ -19,12 +19,18 @@ def tasks(request):
     tasks = Task.objects.all()
     return render(request, 'tasks.html', {'tasks' : tasks})
 
+def create_task(request):
+    if request.method == 'GET':            
+        return render(request, 'create_task.html', {'form' : CreateNewTask()
+        })
+    else:          
+        Task.objects.create(title=request.POST['title'], description=request.POST['description'], project_id=2)        
+        
+        return redirect('/tasks/')
+
 def hello(request, username):
     print(username)
     return HttpResponse('<h2>Hello %s</h2>' %username)
-
-# (Task.objects.all())[0].description = "asdfasdf asdfasdfasdf asdfasdf asdfasdf"
-# Task.objects.all()[0].save()
 
 def addTaskDescription(id, s):
     tarea_existente = Task.objects.get(id=id)

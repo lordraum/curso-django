@@ -11,6 +11,6 @@ class Task(models.Model):
     description = models.TextField()
     project = models.ForeignKey(Project, on_delete = models.CASCADE)
     done = models.BooleanField(default=False)
-    def __str__(self):
-        return self.name
+    #def __str__(self):
+        #return self.name
     

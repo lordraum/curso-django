@@ -418,3 +418,93 @@ bucle for
 ```python
 <h2>{{task.title}} {% if task.done == False %} ⏰ {% else %} ☑️ {% endif %}</h2>
 ```
+## Herencia de plantillas
+Interfaces reutilizables.
+
+### Reutilizar plantillas
+
+- Dentro de templates crear html base
+- Método includes de jinja => Carga una plantilla dentro de otra con la palabra clave extends
+```python
+    {% extends 'base.html' %}
+```
+
+### {block}
+- Es un marcador que permite seguir agregando código en la plantilla donde se cargue la base. Se declara tanto en la base como en la plantilla de destino.
+```python
+{% block /content/ %}
+{% endblock %}
+```
+
+## Formularios
+Recibir información desde el cliente por parte del usuario
+
+### Crear ruta
+
+- Crear template /create_task/ para renderizar la información que envía el usuario.
+- Crear vista
+- Crear pattern/urls.py
+
+### Crear formularios con Django
+
+- En la raíz de /myapp/ crear el archivo /forms/.py 
+- Importar librería forms `from django import forms`
+    - Crea clases (subclases) que instanciarán formularios html
+        - Viene de la clase forms.Form
+- Crear clase para el formulario create task
+    - propiedad para el campo => forms.tipoDeDato(atributos, características del campo) => ejemplo label='Etiqueta'
+    - Cada input o elemento de un form se crea según las especificaciones de la librería form.
+
+```python
+class CreateNewTask(forms.Form):
+    description = forms.TextArea(label='descripción de la tarea' required='false')
+    title = forms.CharField(label='Título de la tarea' max_length=200)
+```
+
+### Cargar formulario en la vista 
+
+- Importar archivo de formularios en views.py. 
+- Pasar como fuente de datos de la vista (2do parámetro del método render)
+- Cargar el formulario en la plantilla html. 
+- La librería configura automáticamente etiquetas, atributos como for, o name.
+
+```python
+def create_task(request):
+    return render(request, 'create_task.html', {'form' : CreateNewTask()})  
+```
+
+### Añadir botones
+La librería form solo crea los input con sus labels, Los botones se crean en el html, al igual que la etiqueta form.
+
+### Propiedad as
+`{{form.as_div}}`
+Establece la etiqueta para los contenedores de los input.
+
+### Método request.GET
+Obtiene la petición que hace el usuario (default en el action del html)
+
+```python
+# views
+def create_task(request):
+    print(request.GET['title'])
+    print(request.GET['description'])
+    # print(request.GET)
+```
+Con esto se verifica que los datos están llegando, pero para guardar los datos en la BBDD hay que utilizar una Solicitud POST.
+
+### Guardar data de los input en BBDD (Modelo Task)
+Establecer el form como post
+
+#### Condicional de las peticiones
+
+- Si el método es `request.method`
+    - GET => Devolver render()
+    - POST => Guardar datos / Devolver redirección hacia la página deseada => entre dos slash /url/
+        - Librería redirect de Django.shortcutser
+
+### {% csrf_token %}
+
+Django verifica si el formulario ha sido generado por nuestro propio servidor, para ello hay que añadir el token en el formulario, antes de la etiqueta jinja que añade el form.
+
+
+
